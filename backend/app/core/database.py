@@ -8,7 +8,7 @@ from .settings import settings
 
 
 engine = create_engine(
-    settings.database_url,
+    settings.SUPABASE_DIRECT_CONNECTION_STRING,
     pool_pre_ping=True,
 )
 
