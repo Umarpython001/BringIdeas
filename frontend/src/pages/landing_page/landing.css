@@ -1,0 +1,566 @@
+/* The poster wall — BringIdeas landing page.
+   World: cream poster stock + flat candy fills + jet-black slab and contour.
+   Flat fills swap hue for state; no shadows, no gradients anywhere. */
+
+.wall {
+  --paper: #f3ead8;
+  --ink: #1c1c1c;
+  --ink-soft: #5a4632;
+  --pink: #e94f9c;
+  --teal: #2fbfae;
+  --marigold: #f7b32b;
+  --slab: 'Alfa Slab One', 'Georgia', serif;
+  --sans: 'PT Sans', 'Segoe UI', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow-x: hidden;
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+/* ── Hero: manifesto panel + paste-wall cluster ──────────────────── */
+
+.wall-hero {
+  display: grid;
+  grid-template-columns: 46fr 52fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+  padding: clamp(36px, 5.5vw, 68px) clamp(18px, 4.5vw, 64px) clamp(36px, 4vw, 48px) clamp(18px, 4.5vw, 64px);
+  max-width: 1560px;
+  width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+.wall-display {
+  font-family: var(--slab);
+  font-weight: 400;
+  font-size: clamp(40px, 5.3vw, 96px); /* display ceiling 6rem */
+  line-height: 1.04;
+  margin: 0;
+}
+
+.wall-display .fl-pink {
+  color: var(--pink);
+}
+
+.wall-display .fl-teal {
+  color: var(--teal);
+}
+
+.wall-lede {
+  margin: 28px 0 0 0;
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+.wall-lede b {
+  font-weight: 700;
+}
+
+.wall-lede b u {
+  text-decoration: underline;
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 3px;
+}
+
+/* Flat printed sun: ring motif, drawn with borders, not halos */
+.wall-sun {
+  width: 96px;
+  height: 96px;
+  margin: 40px 0 0 4px;
+  border-radius: 50%;
+  background: var(--marigold);
+  border: 3px solid var(--ink);
+  position: relative;
+}
+
+.wall-sun::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  border: 3px solid rgba(28, 28, 28, 0.45);
+}
+
+.wall-sun::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 3px solid rgba(28, 28, 28, 0.3);
+}
+
+/* ── The poster cluster ──────────────────────────────────────────── */
+
+.wall-cluster {
+  display: block;
+  position: relative;
+}
+
+.p-sheet {
+  position: relative;
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  padding: 20px 22px 16px 22px;
+  box-sizing: border-box;
+}
+
+.p-sheet {
+  transform: rotate(var(--tilt, 0deg));
+  animation: bi-paste 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+@keyframes bi-paste {
+  from {
+    transform: rotate(calc(var(--tilt, 0deg) * 2)) translateY(10px);
+  }
+  to {
+    transform: rotate(var(--tilt, 0deg)) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-sheet {
+    animation: none;
+  }
+}
+
+.p-pink {
+  background: var(--pink);
+  color: var(--ink);
+}
+
+.p-teal {
+  background: var(--teal);
+}
+
+.p-marigold {
+  background: var(--marigold);
+}
+
+.p-idea {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.28;
+  margin: 0;
+}
+
+.p-meta {
+  margin: 6px 0 0 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.p-sheet .p-shape {
+  display: block;
+  width: 92px;
+  height: 92px;
+  margin-top: 16px;
+}
+
+.p-votes {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  align-items: center;
+}
+
+.p-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 2.5px solid var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.p-pill svg {
+  display: block;
+}
+
+.p-pill-ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.p-pill-line {
+  background: transparent;
+  color: var(--ink);
+}
+
+/* Honest preview stamp on each sample poster */
+.p-stamp {
+  position: absolute;
+  top: -14px;
+  right: 14px;
+  transform: rotate(2deg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  padding: 5px 10px;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  background: var(--paper);
+}
+
+.p-state {
+  margin: 12px 0 0 0;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.p-dot {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  background: var(--ink);
+  margin-right: 7px;
+  vertical-align: -2px;
+}
+
+.p-dot-ghost {
+  background: transparent;
+}
+
+/* Cluster geometry: two top sheets, third offset left-below */
+.wall-cluster .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+
+.wall-cluster .second-row {
+  margin-top: 30px;
+  margin-left: 36%;
+}
+
+.wall-preview-note {
+  margin: 26px 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ── Register bar ────────────────────────────────────────────────── */
+
+.wall-bar {
+  border-top: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+  background: var(--paper);
+  padding: 26px clamp(18px, 4.5vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.bi-slab-cta {
+  font-family: var(--slab);
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1;
+  background: var(--ink);
+  color: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  padding: 18px 30px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+}
+
+/* Hue-swap state: active fills go warm */
+.bi-slab-cta:hover {
+  background: var(--marigold);
+  color: var(--ink);
+}
+
+.wall-note {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ── Squiggle divider ────────────────────────────────────────────── */
+
+.wall-div {
+  display: block;
+  width: min(760px, 74%);
+  margin: clamp(44px, 6vw, 72px) auto 0 auto;
+}
+
+/* ── How the wall works: mis-sized step posters ──────────────────── */
+
+.wall-how {
+  padding: clamp(40px, 5vw, 64px) clamp(18px, 4.5vw, 64px) 0 clamp(18px, 4.5vw, 64px);
+  display: grid;
+  grid-template-columns: 30fr 42fr 28fr;
+  grid-template-rows: auto auto;
+  gap: clamp(20px, 2.6vw, 34px);
+  max-width: 1560px;
+  width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+.wall-hd {
+  font-family: var(--slab);
+  font-size: clamp(28px, 2.6vw, 42px);
+  line-height: 1.05;
+  margin: 0 0 6px 0;
+}
+
+.wall-how .wall-hd {
+  grid-column: 1 / -1;
+  margin-bottom: 4px;
+}
+
+.step {
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  padding: 22px 24px 20px 24px;
+  box-sizing: border-box;
+}
+
+.step h3 {
+  font-family: var(--slab);
+  font-size: 24px;
+  line-height: 1.12;
+  margin: 0;
+}
+
+.step p {
+  margin: 12px 0 0 0;
+  font-size: 15.5px;
+  line-height: 1.55;
+  max-width: 52ch;
+}
+
+.step svg {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin-top: 18px;
+}
+
+/* Deliberately unequal plates, not a row of cards */
+.step-post {
+  background: var(--pink);
+  transform: rotate(-1deg);
+}
+
+.step-judge {
+  background: var(--teal);
+  transform: rotate(0.7deg);
+}
+
+.step-rise {
+  background: var(--paper);
+  transform: rotate(-0.4deg);
+  margin-top: 26px;
+}
+
+/* ── Now / arriving soon ─────────────────────────────────────────── */
+
+.wall-phase {
+  display: grid;
+  grid-template-columns: 58fr 34fr;
+  gap: clamp(20px, 3vw, 40px);
+  padding: clamp(44px, 6vw, 80px) clamp(18px, 4.5vw, 64px) 0 clamp(18px, 4.5vw, 64px);
+  max-width: 1560px;
+  width: 100%;
+  margin-inline: auto;
+  align-items: start;
+  box-sizing: border-box;
+}
+
+.phase-now {
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  background: var(--paper-hi, #fbf6ea);
+  padding: 28px 30px 24px 30px;
+  box-sizing: border-box;
+  background: #fbf6ea;
+}
+
+.phase-now ul {
+  list-style: none;
+  margin: 18px 0 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.phase-now li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.phase-now li b {
+  font-weight: 700;
+}
+
+.phase-soon {
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  background: var(--pink);
+  padding: 26px 26px 22px 26px;
+  transform: rotate(0.8deg);
+  box-sizing: border-box;
+}
+
+.phase-soon ul {
+  list-style: none;
+  margin: 16px 0 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.phase-soon li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 15.5px;
+  letter-spacing: 0.06em;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  padding: 10px 14px;
+  background: var(--paper);
+}
+
+.phase-foot {
+  margin: 16px 0 0 0;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.phase-stamp {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  display: inline-block;
+  padding: 5px 10px;
+}
+
+/* ── Final poster CTA ────────────────────────────────────────────── */
+
+.wall-final {
+  margin: clamp(48px, 6vw, 84px) clamp(18px, 4.5vw, 64px) clamp(52px, 7vw, 92px) clamp(18px, 4.5vw, 64px);
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  background: var(--marigold);
+  padding: clamp(34px, 4.5vw, 64px) clamp(24px, 4vw, 56px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.wall-final h2 {
+  font-family: var(--slab);
+  font-size: clamp(34px, 4vw, 60px);
+  line-height: 1.05;
+  margin: 0;
+  max-width: 15ch;
+}
+
+.wall-final .bi-slab-cta {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+
+@media (max-width: 1080px) {
+  .wall-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .wall-sun {
+    margin-top: 30px;
+  }
+
+  .wall-how {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .step-rise {
+    margin-top: 0;
+    grid-column: 2;
+    transform: rotate(0.6deg);
+  }
+}
+
+@media (max-width: 720px) {
+  .wall-cluster .row {
+    grid-template-columns: 1fr;
+  }
+
+  .wall-cluster .second-row {
+    margin: 26px 0 0 0;
+  }
+
+  .wall-display {
+    font-size: clamp(34px, 9.4vw, 56px);
+  }
+
+  .wall-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wall-how {
+    grid-template-columns: 1fr;
+  }
+
+  .step-rise {
+    grid-column: auto;
+  }
+
+  .wall-phase {
+    grid-template-columns: 1fr;
+  }
+
+  .phase-soon {
+    transform: rotate(-0.5deg);
+  }
+
+  .wall-final {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
