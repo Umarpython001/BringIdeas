@@ -1,0 +1,169 @@
+/* Shared app shell — the poster-wall world (cream paper stock, ink contour,
+   flat candy fills). Used across every route so the whole app sits in one world.
+   Loaded after Bootstrap; self-contained class names, no Bootstrap collisions. */
+
+:root {
+  --bi-paper: #f3ead8;
+  --bi-paper-hi: #fbf6ea;
+  --bi-ink: #1c1c1c;
+  --bi-ink-soft: #5a4632;
+  --bi-pink: #e94f9c;
+  --bi-teal: #2fbfae;
+  --bi-marigold: #f7b32b;
+  --bi-serif: 'Alfa Slab One', 'Georgia', serif;
+  --bi-sans: 'PT Sans', 'Segoe UI', sans-serif;
+  --bi-line: 3px solid var(--bi-ink);
+}
+
+html,
+body {
+  background: var(--bi-paper);
+}
+
+body {
+  color: var(--bi-ink);
+  font-family: var(--bi-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Browser surfaces styled from the palette */
+::selection {
+  background: var(--bi-marigold);
+  color: var(--bi-ink);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bi-paper-hi);
+  border-left: 1px solid rgba(28, 28, 28, 0.25);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bi-ink);
+  border: 3px solid var(--bi-paper-hi);
+}
+
+.bi-shell :focus-visible {
+  outline: 3px solid var(--bi-ink);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.bi-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Nav ─────────────────────────────────────────────────────────── */
+
+.bi-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px clamp(18px, 4.5vw, 64px);
+  background: var(--bi-paper-hi);
+  border-bottom: var(--bi-line);
+}
+
+.bi-mark {
+  font-family: var(--bi-serif);
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1;
+  color: var(--bi-ink);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.bi-mark-note {
+  color: var(--bi-pink);
+  margin-left: 1px;
+}
+
+.bi-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Flat chips: state is a hue swap, never a shadow */
+.bi-chip {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 9px 18px;
+  border: 2.5px solid var(--bi-ink);
+  border-radius: 6px;
+  color: var(--bi-ink);
+  background: transparent;
+  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+}
+
+.bi-chip-ink {
+  background: var(--bi-ink);
+  color: var(--bi-paper-hi);
+}
+
+.bi-chip-ink:hover {
+  background: var(--bi-marigold);
+  color: var(--bi-ink);
+  border-color: var(--bi-ink);
+}
+
+.bi-chip-line:hover {
+  background: var(--bi-ink);
+  color: var(--bi-paper-hi);
+}
+
+/* ── Main ────────────────────────────────────────────────────────── */
+
+.bi-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+
+.bi-footer {
+  border-top: var(--bi-line);
+  background: var(--bi-paper-hi);
+  padding: 34px clamp(18px, 4.5vw, 64px) 30px clamp(18px, 4.5vw, 64px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.bi-mark-sm {
+  font-size: 22px;
+}
+
+.bi-footer-line {
+  margin: 10px 0 0 0;
+  color: var(--bi-ink-soft);
+  font-size: 15px;
+  max-width: 46ch;
+}
+
+.bi-footer-copy {
+  margin: 0;
+  color: var(--bi-ink-soft);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 560px) {
+  .bi-chip {
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+}
