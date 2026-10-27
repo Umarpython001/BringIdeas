@@ -1,24 +1,16 @@
-from enum import Enum
 import re
 from typing import Literal
+
+from ..enums import Occupation
 
 from pydantic import (
     BaseModel,
     ConfigDict,
     EmailStr,
     Field,
-    ValidationInfo,
     field_validator,
     model_validator,
 )
-
-
-class Occupation(str, Enum):
-    Student = "Student"
-    Freelancer = "Freelancer"
-    Developer = "Developer"
-    Designer = "Designer"
-    Other = "Other"
 
 
 # -----------------------------------------------
@@ -28,6 +20,8 @@ class Occupation(str, Enum):
 
 class UserCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
+
+    id : int = Field(description="The unique identifier of the user.")
 
     first_name: str = Field(min_length=2, max_length=100, description="The user's first name.")
     
@@ -41,7 +35,7 @@ class UserCreate(BaseModel):
 
     confirm_password: str = Field(min_length=8, max_length=100, description="Confirm the user's password.")
 
-    age: int = Field(description="The user's age.")
+    age: int = Field(ge=3, le=120, description="The user's age.")
 
     university: str = Field(min_length=5, max_length=255, description="The user's university.")
 
