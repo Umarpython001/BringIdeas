@@ -11,6 +11,7 @@ node_modules/
 dist/
 dist-ssr/
 *.local
+.env.local
 
 # Logs
 logs
@@ -31,3 +32,5 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+.opencode/
+.impeccable/
