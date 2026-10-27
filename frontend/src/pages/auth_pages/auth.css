@@ -1,0 +1,328 @@
+/* Auth surfaces — "The Mural Type" (locked dealt-mural card).
+   The headline is the wall: a flat marigold mural of cropped slab type owns
+   one side; the form stays a standard column on the other. Operate rule:
+   controls are standard web controls — the world speaks through type,
+   palette and the flat blob, never through costume inputs.
+   Inherits every token from container.css (--bi-*); adds none. */
+
+.au-auth {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 44fr 56fr;
+  min-height: 100%;
+}
+
+/* ── The mural (left on desktop, top band on mobile) ─────────────── */
+
+.au-mural {
+  background: var(--bi-marigold);
+  border-right: var(--bi-line);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(40px, 7vh, 90px) clamp(26px, 4vw, 64px) clamp(32px, 6vh, 72px)
+    clamp(24px, 4.5vw, 64px);
+  min-width: 0;
+}
+
+.au-title {
+  font-family: var(--bi-serif);
+  font-size: clamp(120px, 12.5vw, 178px);
+  line-height: 0.92;
+  /* Pull the first line flush to the crop like a paste-up. */
+  margin: -0.04em 0 0 -0.045em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+/* The period is a cut-out: ink stroke, no fill. */
+.au-dot {
+  color: transparent;
+  -webkit-text-stroke: 3px var(--bi-ink);
+}
+
+.au-rule {
+  border: 0;
+  border-top: var(--bi-line);
+  width: min(100%, 300px);
+  margin: clamp(18px, 3vh, 28px) 0;
+  position: relative;
+  z-index: 1;
+}
+
+.au-sub {
+  font-size: clamp(16px, 1.3vw, 18px);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--bi-ink);
+  max-width: 34ch;
+  position: relative;
+  z-index: 1;
+}
+
+.au-chips {
+  margin-top: auto;
+  padding-top: clamp(36px, 8vh, 72px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.au-chip {
+  background: var(--bi-ink);
+  color: var(--bi-marigold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 7px 13px;
+  border-radius: 6px;
+}
+
+.au-blob {
+  position: absolute;
+  right: -72px;
+  bottom: -84px;
+  width: 224px;
+  height: 224px;
+  background: var(--bi-pink);
+  border: 2.5px solid var(--bi-ink);
+  border-radius: 55% 45% 47% 53% / 48% 55% 45% 52%;
+}
+
+.au-blob-teal {
+  background: var(--bi-teal);
+}
+
+/* ── The form side ───────────────────────────────────────────────── */
+
+.au-side {
+  background: var(--bi-paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(32px, 6vh, 64px) clamp(20px, 4vw, 56px);
+  min-width: 0;
+}
+
+.au-sheet {
+  width: min(480px, 100%);
+  background: var(--bi-paper-hi);
+  border: var(--bi-line);
+  border-radius: 6px;
+  padding: clamp(24px, 3vw, 34px) clamp(20px, 3vw, 34px);
+}
+
+.au-row {
+  display: flex;
+  gap: 14px;
+}
+
+.au-row > .au-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.au-narrow {
+  flex: 0 0 118px !important;
+}
+
+.au-group {
+  margin-bottom: 14px;
+}
+
+.au-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.au-opt {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--bi-ink-soft);
+  text-transform: none;
+}
+
+/* Standard controls, world-painted: white field, 2px ink contour,
+   marigold on focus, pink when invalid. No costume internals. */
+.au-field {
+  width: 100%;
+  border: 2px solid var(--bi-ink);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--bi-ink);
+  font-family: var(--bi-sans);
+  font-size: 15px;
+  padding: 10px 12px;
+}
+
+.au-field:focus {
+  border-color: var(--bi-marigold);
+}
+
+.au-bad {
+  border-color: var(--bi-pink);
+}
+
+.au-err {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--bi-ink);
+}
+
+.au-err-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bi-pink);
+  border: 1.5px solid var(--bi-ink);
+}
+
+/* Slab voice, caps like the locked comp. */
+.au-cta {
+  width: 100%;
+  background: var(--bi-ink);
+  color: var(--bi-paper-hi);
+  font-family: var(--bi-serif);
+  font-size: 19px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 2.5px solid var(--bi-ink);
+  border-radius: 6px;
+  padding: 13px 16px;
+  cursor: pointer;
+  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+}
+
+.au-cta:hover:not(:disabled) {
+  background: var(--bi-marigold);
+  color: var(--bi-ink);
+}
+
+/* Submitting/disabled: the chip dims while the wall listens. */
+.au-cta:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.au-alt {
+  margin: 14px 0 0 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--bi-ink-soft);
+}
+
+.au-alt a {
+  color: var(--bi-ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+/* ── Waitlist confirmation (pre-launch mode) ─────────────────────── */
+
+.au-done {
+  padding: 4px 0;
+}
+
+.au-done-title {
+  font-family: var(--bi-serif);
+  font-size: 26px;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.au-done > p:not(.au-alt):not(.au-done-title) {
+  color: var(--bi-ink-soft);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Screen-reader status lane: one always-mounted element every state
+   writes to — invalid, unwired, and the announced confirmation. */
+.au-status {
+  margin: 0;
+}
+
+/* Degraded-mode note (capture not wired in this build): a quiet
+   infrastructure note, not a field error — the email can't be wrong
+   about its own form's wiring. */
+.au-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--bi-ink-soft);
+}
+
+/* ── Mobile: the mural compresses to a top band ──────────────────── */
+
+@media (max-width: 900px) {
+  .au-auth {
+    grid-template-columns: 1fr;
+  }
+
+  .au-mural {
+    border-right: 0;
+    border-bottom: var(--bi-line);
+    padding: 30px 24px 26px 24px;
+  }
+
+  .au-title {
+    font-size: clamp(64px, 19vw, 104px);
+  }
+
+  .au-rule {
+    margin: 12px 0;
+  }
+
+  .au-chips {
+    margin-top: 16px;
+    padding-top: 0;
+  }
+
+  .au-blob {
+    right: -110px;
+    bottom: -130px;
+    width: 190px;
+    height: 190px;
+  }
+}
+
+@media (max-width: 560px) {
+  .au-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .au-narrow {
+    flex: 1 1 auto !important;
+  }
+
+  .au-side {
+    padding: 26px 16px 34px 16px;
+  }
+
+  .au-sheet {
+    padding: 22px 18px;
+  }
+}
