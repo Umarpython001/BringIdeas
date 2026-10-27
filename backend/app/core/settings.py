@@ -42,23 +42,35 @@ class Settings(BaseSettings):
 
     
     # --- APPLICATION METADATA ---
-    PROJECT_NAME: str
-    ENVIRONMENT: Literal["development", "staging", "production"] = "development"
+    PROJECT_NAME: str = "BringIdeas"
+    APP_ENV: Literal["development", "production"] = "development"
     DEBUG: bool = False
     API_V1_STR: str = "/api"
 
-    # --- SUPABASE CREDENTIALS ---
 
-    SUPABASE_DATABASE_PASSWORD: str
+    # --- Development Database
+    DEVELOPMENT_DATABASE_URL: SecretStr
+
+    # --- SUPABASE CREDENTIALS ---
     SUPABASE_PROJECT_URL: str
     SUPABASE_PUBLISHABLE_KEY: str
-    SUPABASE_DIRECT_CONNECTION_STRING: str
+    SUPABASE_DIRECT_CONNECTION_STRING: SecretStr
+
+
+    # --- DATABASE URL
+    @property
+    def database_url(self) -> SecretStr:
+        if self.APP_ENV == "development":
+            return self.DEVELOPMENT_DATABASE_URL
+
+        return self.SUPABASE_DIRECT_CONNECTION_STRING
 
     # --- CORS ORIGIN LIST --- 
-    BACKEND_CORS_ORIGINS: Annotated[
+
+    ALLOWED_CORS_ORIGINS: Annotated[
         list[AnyHttpUrl] | list[str], 
         BeforeValidator(parse_cors_origins)
-    ] = []
+    ]
 
     # --- PYDANTIC SETTINGS CONTROLS ---
     model_config = SettingsConfigDict(
