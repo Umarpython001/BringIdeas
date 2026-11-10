@@ -17,7 +17,7 @@ ENV_FILE_PATH = BACKEND_DIR / ".env"
 
 
 
-def parse_cors_origins(v: str | list[str]) -> list[str]:
+def parse_cors_origins(v: str | list[str]) -> list[str]: # This function is or separating allowed CORS into a clean list
     """
     Transforms a comma-separated string from the .env file 
     into a clean list of allowed domains for FastAPI CORS middleware.
@@ -43,13 +43,9 @@ class Settings(BaseSettings):
     
     # --- APPLICATION METADATA ---
     PROJECT_NAME: str = "BringIdeas"
-    APP_ENV: Literal["development", "production"] = "development"
     DEBUG: bool = False
     API_V1_STR: str = "/api"
 
-
-    # --- Development Database
-    DEVELOPMENT_DATABASE_URL: SecretStr
 
     # --- SUPABASE CREDENTIALS ---
     SUPABASE_PROJECT_URL: str
@@ -60,9 +56,6 @@ class Settings(BaseSettings):
     # --- DATABASE URL
     @property
     def database_url(self) -> SecretStr:
-        if self.APP_ENV == "development":
-            return self.DEVELOPMENT_DATABASE_URL
-
         return self.SUPABASE_DIRECT_CONNECTION_STRING
 
     # --- CORS ORIGIN LIST --- 
