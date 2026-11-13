@@ -9,13 +9,17 @@ from .settings import settings
 
 engine = create_engine(
     settings.SUPABASE_DIRECT_CONNECTION_STRING,
+    echo=True,
     pool_pre_ping=True,
+    pool_size=20,
+    max_overflow=15,
 )
 
 SessionLocal = sessionmaker(
     bind=engine,
     autoflush=False,
-    expire_on_commit=False,
+    autocommit=False,
+    expire_on_commit=True,
 )
 
 
