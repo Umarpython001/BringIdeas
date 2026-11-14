@@ -107,6 +107,7 @@ class UserTable(Base):
     occupation_other: Mapped[str | None] = mapped_column(
         String(255),
         nullable=True,
+        default=None
     )
 
     created_at: Mapped[datetime] = mapped_column(
