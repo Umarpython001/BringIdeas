@@ -1,5 +1,5 @@
 import re
-from typing import Literal
+from typing import Literal, Annotated
 
 from ..enums import Occupation
 
@@ -21,8 +21,6 @@ from pydantic import (
 class UserCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    id : int = Field(description="The unique identifier of the user.")
-
     first_name: str = Field(min_length=2, max_length=100, description="The user's first name.")
     
     last_name: str = Field(min_length=2, max_length=100, description="The user's last name.")
@@ -41,13 +39,19 @@ class UserCreate(BaseModel):
 
     occupation: Occupation = Field(description="The user's occupation.",)
 
-    occupation_other: str = Field(min_length=5, max_length=255, description="Details about the user's occupation, if applicable.")
+    occupation_other: str | None = Field(default=None, min_length=5, max_length=255, description="Details about the user's occupation, if applicable.")
 
 
     @model_validator(mode="after")
     def verify_passwords_match(self) -> "UserCreate":
         if self.password != self.confirm_password:
             raise ValueError("passwords do not match")
+        return self
+
+    @model_validator(mode="after")
+    def validate_occupation_details(self) -> "UserCreate":
+        if (self.occupation == Occupation.Other) and (self.occupation_other == None):
+            raise ValueError("Please specify your occupation.")
         return self
 
 
