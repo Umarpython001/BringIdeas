@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { Link } from 'react-router';
+import { signUpUser } from '../../../services/authService';
 import '../auth.css';
 
 const OCCUPATIONS = [
@@ -64,7 +65,8 @@ function SignupPage() {
   const update =
     (field: keyof Values) =>
     (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
-      setValues((current) => ({ ...current, [field]: event.target.value }));
+    // Updates the specific field in values, leaving the other fields alone.
+      setValues((current) => ({ ...current, [field]: event.target.value }));;
 
   function validate(): Errors {
     const next: Errors = {};
@@ -104,6 +106,10 @@ function SignupPage() {
 
     setSubmitting(true);
     // ── Wire your backend here ─────────────────────────────────
+
+    signUpUser(values)
+
+
     // This is the integration point. Example shape (Supabase-ready):
     //
     //   const { error } = await signUp({
