@@ -24,6 +24,8 @@ export async function signUpUser(userData: SignUpData) {
         username: userData.username,
         age: userData.age,
         university: userData.school,
+        occupation: userData.occupation,
+        occupation_other: userData.other,
       },
     },
   });

@@ -110,6 +110,11 @@ function SignupPage() {
     signUpUser(values)
 
 
+
+
+    
+
+
     // This is the integration point. Example shape (Supabase-ready):
     //
     //   const { error } = await signUp({
