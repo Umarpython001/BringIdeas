@@ -1,6 +1,6 @@
 
 # BringIdeas
-
+ 
 **Bring an idea. Discover another. Find your people.**
 
 BringIdeas is a student-focused idea-sharing platform initially built for the University of Lagos (UNILAG). It gives students a place to share their ideas, discover what others are thinking about, and vote on ideas they find interesting.
