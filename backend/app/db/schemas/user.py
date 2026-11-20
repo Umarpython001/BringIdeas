@@ -18,7 +18,7 @@ from app.enums import Occupation
 
 
 class UserTable(Base):
-    __tablename__ = "user_table"
+    __tablename__ = "users"
 
     __table_args__ = (
         CheckConstraint(
